@@ -1,5 +1,5 @@
 import React from 'react';
-import uuid from 'uuid/v4';
+// import uuid from 'uuid/v4';
 import Draggable from './Draggable/Draggable'
 import { DraggablePosition } from '../../models/DraggablePosition';
 import ImageBackground from '../../../assets/bkg.jpg';
@@ -91,14 +91,6 @@ export class DraggableArea extends React.Component<DraggableAreaProps, any> {
 
         const { initPosition } = this.state;
 
-        if (!this.isTouch(event)) {
-            currentX = event.clientX - initPosition.x;
-            currentY = event.clientY - initPosition.y;
-        } else {
-            currentX = event.touches[0].clientX - initPosition.x;
-            currentY = event.touches[0].clientY - initPosition.y;
-        }
-
         const DRAGGABLE_ELEMENT_WIDTH = 120;
         const DRAGGABLE_ELEMENT_HEIGHT = 70;
 
@@ -107,6 +99,14 @@ export class DraggableArea extends React.Component<DraggableAreaProps, any> {
 
         const rightBound = areaWidth - DRAGGABLE_ELEMENT_WIDTH;
         const bottomBound = areaHeight - DRAGGABLE_ELEMENT_HEIGHT;
+
+        if (!this.isTouch(event)) {
+            currentX = event.clientX - initPosition.x;
+            currentY = event.clientY - initPosition.y;
+        } else {
+            currentX = event.touches[0].clientX - initPosition.x;
+            currentY = event.touches[0].clientY - initPosition.y;
+        }
 
         if (this.state.isDragging) {
 
@@ -144,7 +144,7 @@ export class DraggableArea extends React.Component<DraggableAreaProps, any> {
             >
                 <img src={ImageBackground} alt="background image" />
                 <Draggable
-                    id={uuid()}
+                    id="js-draggable"
                     initPosition={initPosition}
                     currentPosition={currentPosition}
                     mouseUpHandler={this.mouseUpHandler}
